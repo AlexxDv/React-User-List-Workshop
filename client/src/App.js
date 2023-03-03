@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import * as userService from "./services/userService";
 
 import { Footer } from "./components/Footer";
@@ -9,10 +9,12 @@ import "./App.css"
 
 
 function App() {
+    const [users, setUsers] = useState([])
+
     useEffect(() => {
         userService.getAll()
-            .then(users => {
-                console.log(users);
+            .then(users => { // or .then(setUsers)
+                setUsers(users)
             })
             .catch(err => {
                 console.log("Error" + err);
@@ -28,7 +30,7 @@ function App() {
                 <section className="card users-container" />
 
                 < Search />
-                < UserList />
+                < UserList users={users} />
 
             </main>
 

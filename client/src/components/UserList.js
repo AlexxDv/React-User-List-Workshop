@@ -1,7 +1,18 @@
+import { useState } from "react"
 import { User } from "./User"
+import { UserDetails } from "./UserDetails"
 
-export const UserList = () => {
+export const UserList = ({
+    users,
+}) => {
+    const [selectedUser, setSelectedUser] = useState(null)
+
+    const onInfoClick = (userId) => {
+        setSelectedUser(userId)
+    }
     return (
+        <>
+        <UserDetails  />
         <div className="table-wrapper">
 
             {/* <div className="loading-shade">
@@ -127,11 +138,10 @@ export const UserList = () => {
                     </tr>
                 </thead>
                 <tbody>
-
-                   <User/>
-                   
+                    {users.map(u => <User key={u._id} {...u} />)}
                 </tbody>
             </table>
         </div>
+        </>
     )
 }
