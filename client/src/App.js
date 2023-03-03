@@ -1,3 +1,5 @@
+import { useEffect } from "react"
+import * as userService from "./services/userService";
 
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -7,21 +9,33 @@ import "./App.css"
 
 
 function App() {
-  return (
-    <>
+    useEffect(() => {
+        userService.getAll()
+            .then(users => {
+                console.log(users);
+            })
+            .catch(err => {
+                console.log("Error" + err);
+            })
+    }, []);
 
-      < Header />
+    return (
+        <>
 
-      <main className="main">
-        < Search />
-        < UserList />
+            < Header />
 
-      </main>
+            <main className="main">
+                <section className="card users-container" />
 
-      < Footer />
+                < Search />
+                < UserList />
 
-    </>
-  );
+            </main>
+
+            < Footer />
+
+        </>
+    );
 }
 
 export default App;
