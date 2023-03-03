@@ -9,7 +9,8 @@ export const UserDetails = ({
     createdAt,
     updatedAt,
     phoneNumber,
-    address
+    address,
+    onClose
 }) => {
     return (
         <div className="overlay">
@@ -18,7 +19,7 @@ export const UserDetails = ({
                 <div className="detail-container">
                     <header className="headers">
                         <h2>User Detail</h2>
-                        <button className="btn close">
+                        <button className="btn close" onClick={onClose}>
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark"
                                 className="svg-inline--fa fa-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                 <path fill="currentColor"

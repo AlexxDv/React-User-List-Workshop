@@ -13,11 +13,15 @@ export const UserList = ({
         const user = await userService.getOne(userId)
 
         setSelectedUser(user)
-       
+
+    }
+
+    const onClose = () => {
+        setSelectedUser(null)
     }
     return (
         <>
-            {selectedUser && <UserDetails {...selectedUser} />}
+            {selectedUser && <UserDetails {...selectedUser} onClose={onClose} />}
             <div className="table-wrapper">
 
                 {/* <div className="loading-shade">

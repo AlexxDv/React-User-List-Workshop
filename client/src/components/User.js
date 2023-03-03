@@ -9,6 +9,7 @@ export const User = ({
     createdAt,
     phoneNumber,
     onInfoClick,
+    onClose,
 }) => {
     return (
         <tr>
