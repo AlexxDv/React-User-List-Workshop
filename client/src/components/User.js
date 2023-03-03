@@ -1,8 +1,4 @@
-const formatDate = (input) => {
-    const date = new Date(input);
-    const options = { month: 'long', day: 'numeric', year: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
-}
+import { formatDate } from "../utils/dateUtils";
 
 export const User = ({
     _id,
