@@ -4,6 +4,7 @@ import * as userService from '../services/userService'
 import { User } from "./User"
 import { UserDetails } from "./UserDetails"
 import { UserEdit } from "./UserEdit"
+import { UserDelete } from "./UserDelete"
 
 const UserActions = {
     Details: "details",
@@ -28,7 +29,7 @@ export const UserList = ({
         setUserAction(UserActions.Details)
     }
 
-    const onEditClick =  (userId) => {
+    const onEditClick = (userId) => {
        userService.getOne(userId)
             .then(user => {
                 setUserAction({
@@ -36,10 +37,9 @@ export const UserList = ({
                     action: UserActions.Edit
                 })
             })
-        setUserAction(UserActions.Edit)
     }
 
-    const onDeleteClick = async (userId) => {
+    const onDeleteClick = (userId) => {
         userService.getOne(userId)
             .then(user => {
                 setUserAction({
@@ -47,7 +47,7 @@ export const UserList = ({
                     action: UserActions.Delete
                 })
             })
-        setUserAction(UserActions.EditDelete)
+
     }
 
     // const onInfoClick = async (userId) => {
@@ -63,6 +63,7 @@ export const UserList = ({
         <>
             {userAction.action === UserActions.Edit && <UserEdit {...userAction.user} onClose={onClose} />}
             {userAction.action === UserActions.Details && <UserDetails {...userAction.user} onClose={onClose} />}
+            {userAction.action === UserActions.Delete && <UserDelete {...userAction.user} onClose={onClose} />}
             <div className="table-wrapper">
 
                 {/* <div className="loading-shade">
