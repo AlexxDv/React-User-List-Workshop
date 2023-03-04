@@ -5,11 +5,13 @@ import { User } from "./User"
 import { UserDetails } from "./UserDetails"
 import { UserEdit } from "./UserEdit"
 import { UserDelete } from "./UserDelete"
+import { UserAdd } from "./UserAdd"
 
 const UserActions = {
     Details: "details",
     Edit: "edit",
-    Detele: "delete"
+    Detele: "delete",
+    Add: "add"
 }
 
 export const UserList = ({
@@ -18,7 +20,7 @@ export const UserList = ({
     // const [selectedUser, setSelectedUser] = useState(null)
     const [userAction, setUserAction] = useState({ user: null, action: null })
 
-    const onInfoClick =  (userId) => {
+    const onInfoClick = (userId) => {
         userService.getOne(userId)
             .then(user => {
                 setUserAction({
@@ -30,13 +32,20 @@ export const UserList = ({
     }
 
     const onEditClick = (userId) => {
-       userService.getOne(userId)
+        userService.getOne(userId)
             .then(user => {
                 setUserAction({
                     user,
                     action: UserActions.Edit
                 })
             })
+    }
+
+    const onAddClick = () => {
+        setUserAction({
+            user: null,
+            action: UserActions.Add
+        })
     }
 
     const onDeleteClick = (userId) => {
@@ -62,8 +71,10 @@ export const UserList = ({
     return (
         <>
             {userAction.action === UserActions.Edit && <UserEdit {...userAction.user} onClose={onClose} />}
+            {userAction.action === UserActions.Add && <UserAdd {...userAction.user} onClose={onClose} />}
             {userAction.action === UserActions.Details && <UserDetails {...userAction.user} onClose={onClose} />}
             {userAction.action === UserActions.Delete && <UserDelete {...userAction.user} onClose={onClose} />}
+
             <div className="table-wrapper">
 
                 {/* <div className="loading-shade">
@@ -193,6 +204,7 @@ export const UserList = ({
                     </tbody>
                 </table>
             </div>
+            <button className="btn-add btn" onClick={onAddClick}>Add new user</button>
         </>
     )
 }
