@@ -4,24 +4,41 @@ import * as userService from '../services/userService'
 import { User } from "./User"
 import { UserDetails } from "./UserDetails"
 
+const UserActions = {
+    Details: "details",
+    Edit: "edit",
+    Detele: "delete"
+}
+
 export const UserList = ({
     users,
 }) => {
-    const [selectedUser, setSelectedUser] = useState(null)
+    // const [selectedUser, setSelectedUser] = useState(null)
+    const [userAction, setUserAction] = useState({ user: null, action: null })
 
     const onInfoClick = async (userId) => {
-        const user = await userService.getOne(userId)
-
-        setSelectedUser(user)
-
+        userService.getOne(userId)
+            .then(user => {
+                setUserAction({
+                    user,
+                    action: UserActions.Details
+                })
+            })
+            setUserAction(UserActions.Details)
     }
+
+    // const onInfoClick = async (userId) => {
+    //     const user = await userService.getOne(userId)
+    //     setSelectedUser(user)     
+    // }
 
     const onClose = () => {
-        setSelectedUser(null)
+        setUserAction({ user: null, action: null })
     }
+
     return (
         <>
-            {selectedUser && <UserDetails {...selectedUser} onClose={onClose} />}
+            {userAction.action && <UserDetails {...userAction.user} onClose={onClose} />}
             <div className="table-wrapper">
 
                 {/* <div className="loading-shade">
