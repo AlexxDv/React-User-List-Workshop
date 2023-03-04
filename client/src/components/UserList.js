@@ -59,6 +59,8 @@ export const UserList = ({
 
     }
 
+
+
     // const onInfoClick = async (userId) => {
     //     const user = await userService.getOne(userId)
     //     setSelectedUser(user)     
@@ -68,10 +70,22 @@ export const UserList = ({
         setUserAction({ user: null, action: null })
     }
 
+    const onCreate = (e) => {
+        e.reventDefault();
+
+        const formData = new FormData(e.target)
+        const userData = Object.fromEntries(formData)
+
+        userService.create(userData)
+            .then(() => {
+                onClose()
+            })
+    }
+
     return (
         <>
             {userAction.action === UserActions.Edit && <UserEdit {...userAction.user} onClose={onClose} />}
-            {userAction.action === UserActions.Add && <UserAdd {...userAction.user} onClose={onClose} />}
+            {userAction.action === UserActions.Add && <UserAdd {...userAction.user} onUserCreate={onCreate} onClose={onClose} />}
             {userAction.action === UserActions.Details && <UserDetails {...userAction.user} onClose={onClose} />}
             {userAction.action === UserActions.Delete && <UserDelete {...userAction.user} onClose={onClose} />}
 

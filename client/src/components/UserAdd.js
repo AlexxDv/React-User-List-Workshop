@@ -8,6 +8,7 @@ export const UserAdd = ({
     updatedAt,
     phoneNumber,
     address,
+    onUserCreate,
     onClose
 }) => {
     return (
@@ -16,7 +17,7 @@ export const UserAdd = ({
             <div className="modal">
                 <div className="user-container">
                     <header className="headers">
-                        <h2>Edit User/Add User</h2>
+                        <h2>Add User</h2>
                         <button className="btn close" onClick={onClose}>
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark"
                                 className="svg-inline--fa fa-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -26,7 +27,7 @@ export const UserAdd = ({
                             </svg>
                         </button>
                     </header>
-                    <form>
+                    <form onSubmit={onUserCreate}>
                         <div className="form-row">
                             <div className="form-group">
                                 <label htmlFor="firstName">First name</label>
