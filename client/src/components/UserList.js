@@ -3,6 +3,7 @@ import { useState } from "react"
 import * as userService from '../services/userService'
 import { User } from "./User"
 import { UserDetails } from "./UserDetails"
+import { UserEdit } from "./UserEdit"
 
 const UserActions = {
     Details: "details",
@@ -16,7 +17,7 @@ export const UserList = ({
     // const [selectedUser, setSelectedUser] = useState(null)
     const [userAction, setUserAction] = useState({ user: null, action: null })
 
-    const onInfoClick = async (userId) => {
+    const onInfoClick =  (userId) => {
         userService.getOne(userId)
             .then(user => {
                 setUserAction({
@@ -24,7 +25,29 @@ export const UserList = ({
                     action: UserActions.Details
                 })
             })
-            setUserAction(UserActions.Details)
+        setUserAction(UserActions.Details)
+    }
+
+    const onEditClick =  (userId) => {
+       userService.getOne(userId)
+            .then(user => {
+                setUserAction({
+                    user,
+                    action: UserActions.Edit
+                })
+            })
+        setUserAction(UserActions.Edit)
+    }
+
+    const onDeleteClick = async (userId) => {
+        userService.getOne(userId)
+            .then(user => {
+                setUserAction({
+                    user,
+                    action: UserActions.Delete
+                })
+            })
+        setUserAction(UserActions.EditDelete)
     }
 
     // const onInfoClick = async (userId) => {
@@ -38,7 +61,8 @@ export const UserList = ({
 
     return (
         <>
-            {userAction.action && <UserDetails {...userAction.user} onClose={onClose} />}
+            {userAction.action === UserActions.Edit && <UserEdit {...userAction.user} onClose={onClose} />}
+            {userAction.action === UserActions.Details && <UserDetails {...userAction.user} onClose={onClose} />}
             <div className="table-wrapper">
 
                 {/* <div className="loading-shade">
@@ -164,7 +188,7 @@ export const UserList = ({
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map(u => <User key={u._id} {...u} onInfoClick={onInfoClick} />)}
+                        {users.map(u => <User key={u._id} {...u} onInfoClick={onInfoClick} onEditClick={onEditClick} onDeleteClick={onDeleteClick} />)}
                     </tbody>
                 </table>
             </div>
