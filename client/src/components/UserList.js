@@ -63,29 +63,21 @@ export const UserList = ({
         setUserAction({ user: null, action: null })
     }
 
-  const onUserCreateSubmit = async (e) => {
+    const onUserCreateSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target)
         const userData = Object.fromEntries(formData)
 
         const createdUser = await userService.create(userData)
-            .then(() => {
-                onClose()
-            })
-            UserList(x => [...x, createdUser])
+        UserList(x => [...x, createdUser])
+        createdUser.onClose()
     }
-
-
 
     // const onInfoClick = async (userId) => {
     //     const user = await userService.getOne(userId)
     //     setSelectedUser(user)     
     // }
-
-   
-
-   
 
     return (
         <>
