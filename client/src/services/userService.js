@@ -45,5 +45,5 @@ export const remove = async (userId) => {
 
     const result = await responce.json()
 
-    return result
+    return result.user
 }

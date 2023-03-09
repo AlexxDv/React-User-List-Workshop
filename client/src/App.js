@@ -34,7 +34,7 @@ function App() {
 
     const onUserDelete = async (userId) => {
         // Delete from server
-        await userService.deleteUser(userId)
+        await userService.remove(userId)
 
         // Delete from client/state
         setUsers(x => x.filter(u => u._id !== userId))

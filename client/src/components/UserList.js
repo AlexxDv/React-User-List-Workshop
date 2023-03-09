@@ -70,11 +70,18 @@ export const UserList = ({
 
     };
 
+    const onDeleteHandler = () => {
+        onUserDelete(userAction.user._id)
+        setUserAction({ user: null, action: null })
+    }
+
+
+
     return (
         <>
             {userAction.action === UserActions.Edit && <UserEdit {...userAction.user} onClose={onClose} />}
             {userAction.action === UserActions.Add && <UserAdd {...userAction.user} onUserCreateSubmit={onUserCreateSubmitHandler} onClose={onClose} />}
-            {userAction.action === UserActions.Delete && <UserDelete {...userAction.user} onDelete = {onUserDelete} onClose={onClose} />}
+            {userAction.action === UserActions.Delete && <UserDelete {...userAction.user} onDeleteClick = {onDeleteHandler} onClose={onClose} />}
             {userAction.action === UserActions.Details && <UserDetails {...userAction.user} onClose={onClose} />}
 
             <div className="table-wrapper">
