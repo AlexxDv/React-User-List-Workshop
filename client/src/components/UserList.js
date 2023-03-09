@@ -71,17 +71,7 @@ export const UserList = ({
         setUserAction({ user: null, action: null })
     }
 
-    // const onUserCreate = (e) => {
-    //     e.reventDefault();
-
-    //     const formData = new FormData(e.target)
-    //     const userData = Object.fromEntries(formData)
-
-    //     userService.create(userData)
-    //         .then(() => {
-    //             onClose()
-    //         })
-    // }
+   
 
     return (
         <>

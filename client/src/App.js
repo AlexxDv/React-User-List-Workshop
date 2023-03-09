@@ -22,8 +22,16 @@ function App() {
     }, []);
 
 
-    const onUserCreate = (e) => {
+    const onUserCreateSubmit = (e) => {
+        e.preventDefault();
 
+        const formData = new FormData(e.target)
+        const userData = Object.fromEntries(formData)
+
+        userService.create(userData)
+            // .then(() => {
+            //     onclose()
+            // })
     }
     return (
         <>
@@ -33,7 +41,7 @@ function App() {
                 <section className="card users-container" />
 
                 < Search />
-                < UserList users={users} onUserCreate={onUserCreate} />
+                < UserList users={users} onUserCreateSubmit={onUserCreateSubmit} />
 
             </main>
 
