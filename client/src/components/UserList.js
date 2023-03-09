@@ -16,8 +16,8 @@ const UserActions = {
 
 export const UserList = ({
     users,
+    onUserCreateSubmit,
 }) => {
-    // const [selectedUser, setSelectedUser] = useState(null)
     const [userAction, setUserAction] = useState({ user: null, action: null })
 
     const onInfoClick = (userId) => {
@@ -63,26 +63,16 @@ export const UserList = ({
         setUserAction({ user: null, action: null })
     }
 
-    const onUserCreateSubmit = async (e) => {
-        e.preventDefault();
+    const onUserCreateSubmitHandler = (e) => {
+        onUserCreateSubmit(e);
+        setUserAction({ user: null, action: null })
 
-        const formData = new FormData(e.target)
-        const userData = Object.fromEntries(formData)
-
-        const createdUser = await userService.create(userData)
-        UserList(x => [...x, createdUser])
-        createdUser.onClose()
-    }
-
-    // const onInfoClick = async (userId) => {
-    //     const user = await userService.getOne(userId)
-    //     setSelectedUser(user)     
-    // }
+    };
 
     return (
         <>
             {userAction.action === UserActions.Edit && <UserEdit {...userAction.user} onClose={onClose} />}
-            {userAction.action === UserActions.Add && <UserAdd {...userAction.user} onUserCreateSubmit={onUserCreateSubmit} onClose={onClose} />}
+            {userAction.action === UserActions.Add && <UserAdd {...userAction.user} onUserCreateSubmit={onUserCreateSubmitHandler} onClose={onClose} />}
             {userAction.action === UserActions.Details && <UserDetails {...userAction.user} onClose={onClose} />}
             {userAction.action === UserActions.Delete && <UserDelete {...userAction.user} onClose={onClose} />}
 
