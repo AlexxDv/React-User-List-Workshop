@@ -16,7 +16,6 @@ const UserActions = {
 
 export const UserList = ({
     users,
-    onUserCreateSubmit,
 }) => {
     // const [selectedUser, setSelectedUser] = useState(null)
     const [userAction, setUserAction] = useState({ user: null, action: null })
@@ -60,6 +59,23 @@ export const UserList = ({
 
     }
 
+    const onClose = () => {
+        setUserAction({ user: null, action: null })
+    }
+
+  const onUserCreateSubmit = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target)
+        const userData = Object.fromEntries(formData)
+
+        const createdUser = await userService.create(userData)
+            .then(() => {
+                onClose()
+            })
+            UserList(x => [...x, createdUser])
+    }
+
 
 
     // const onInfoClick = async (userId) => {
@@ -67,9 +83,7 @@ export const UserList = ({
     //     setSelectedUser(user)     
     // }
 
-    const onClose = () => {
-        setUserAction({ user: null, action: null })
-    }
+   
 
    
 

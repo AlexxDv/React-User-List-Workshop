@@ -22,17 +22,20 @@ function App() {
     }, []);
 
 
-    const onUserCreateSubmit = (e) => {
-        e.preventDefault();
+    // const onUserCreateSubmit = async (e) => {
+    //     e.preventDefault();
 
-        const formData = new FormData(e.target)
-        const userData = Object.fromEntries(formData)
+    //     const formData = new FormData(e.target)
+    //     const userData = Object.fromEntries(formData)
 
-        userService.create(userData)
-            // .then(() => {
-            //     onclose()
-            // })
-    }
+    //     const createdUser = await userService.create(userData)
+    //         // .then(() => {
+    //         //     onclose()
+    //         // })
+    //         setUsers(x => [...x, createdUser])
+    // }
+
+
     return (
         <>
             < Header />
@@ -41,7 +44,7 @@ function App() {
                 <section className="card users-container" />
 
                 < Search />
-                < UserList users={users} onUserCreateSubmit={onUserCreateSubmit} />
+                < UserList users={users} />
 
             </main>
 

@@ -16,16 +16,24 @@ export const getOne = async (userId) => {
 }
 
 export const create = async (userData) => {
+    const { country, city, address, street, streetNumber, ...data } = userData
+    data.address = {
+        streetNumber,
+        street,
+        city,
+        country
+    }
+
     const responce = await fetch(baseUrl, {
         method: "POST",
         headers: {
             'content-type': "application/json"
         },
-        body: JSON.stringify(userData)
+        body: JSON.stringify(data)
     })
 
     const result = await responce.json()
 
     console.log(result);
-    return result
+    return result.user
 }
