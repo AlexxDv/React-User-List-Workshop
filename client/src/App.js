@@ -21,16 +21,19 @@ function App() {
             })
     }, []);
 
+
+    const onUserCreate = (e) => {
+
+    }
     return (
         <>
-
             < Header />
 
             <main className="main">
                 <section className="card users-container" />
 
                 < Search />
-                < UserList users={users} />
+                < UserList users={users} onUserCreate={onUserCreate} />
 
             </main>
 

@@ -8,7 +8,7 @@ export const UserAdd = ({
     updatedAt,
     phoneNumber,
     address,
-    onUserCreate,
+    onUserCreateSubmit,
     onClose
 }) => {
     return (
@@ -27,7 +27,7 @@ export const UserAdd = ({
                             </svg>
                         </button>
                     </header>
-                    <form onSubmit={onUserCreate}>
+                    <form onSubmit={onUserCreateSubmit}>
                         <div className="form-row">
                             <div className="form-group">
                                 <label htmlFor="firstName">First name</label>
