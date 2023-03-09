@@ -17,6 +17,7 @@ const UserActions = {
 export const UserList = ({
     users,
     onUserCreateSubmit,
+    onUserDelete,
 }) => {
     const [userAction, setUserAction] = useState({ user: null, action: null })
 
@@ -73,8 +74,8 @@ export const UserList = ({
         <>
             {userAction.action === UserActions.Edit && <UserEdit {...userAction.user} onClose={onClose} />}
             {userAction.action === UserActions.Add && <UserAdd {...userAction.user} onUserCreateSubmit={onUserCreateSubmitHandler} onClose={onClose} />}
+            {userAction.action === UserActions.Delete && <UserDelete {...userAction.user} onDelete = {onUserDelete} onClose={onClose} />}
             {userAction.action === UserActions.Details && <UserDetails {...userAction.user} onClose={onClose} />}
-            {userAction.action === UserActions.Delete && <UserDelete {...userAction.user} onClose={onClose} />}
 
             <div className="table-wrapper">
 
