@@ -18,6 +18,9 @@ export const UserList = ({
     users,
     onUserCreateSubmit,
     onUserDelete,
+    formValues,
+    formChangeHandler,
+    formErrors,
 }) => {
     const [userAction, setUserAction] = useState({ user: null, action: null })
 
@@ -80,8 +83,16 @@ export const UserList = ({
     return (
         <>
             {userAction.action === UserActions.Edit && <UserEdit {...userAction.user} onClose={onClose} />}
-            {userAction.action === UserActions.Add && <UserAdd {...userAction.user} onUserCreateSubmit={onUserCreateSubmitHandler} onClose={onClose} />}
-            {userAction.action === UserActions.Delete && <UserDelete {...userAction.user} onDeleteClick = {onDeleteHandler} onClose={onClose} />}
+            {userAction.action === UserActions.Add &&
+                < UserAdd
+                    {...userAction.user}
+                    onUserCreateSubmit={onUserCreateSubmitHandler}
+                    onClose={onClose}
+                    formValues={formValues}
+                    formChangeHandler={formChangeHandler}
+                    formErrors={formErrors}
+                />}
+            {userAction.action === UserActions.Delete && <UserDelete {...userAction.user} onDeleteClick={onDeleteHandler} onClose={onClose} />}
             {userAction.action === UserActions.Details && <UserDetails {...userAction.user} onClose={onClose} />}
 
             <div className="table-wrapper">

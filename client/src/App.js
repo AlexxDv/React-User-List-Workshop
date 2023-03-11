@@ -10,7 +10,12 @@ import "./App.css"
 
 function App() {
     const [users, setUsers] = useState([])
-    const [formValue, setFormValue] = useState({
+    const [formValues, setFormValues] = useState({
+        firstName: "",
+        lastName: "",
+    })
+
+    const [formErrors, setFormErrors] = useState({
         firstName: "",
         lastName: "",
     })
@@ -32,6 +37,7 @@ function App() {
         const formData = new FormData(e.target)
         const userData = Object.fromEntries(formData)
 
+
         const createdUser = await userService.create(userData)
         setUsers(x => [...x, createdUser])
     }
@@ -42,6 +48,20 @@ function App() {
 
         // Delete from client/state
         setUsers(x => x.filter(u => u._id !== userId))
+    }
+
+    const formChangeHandler = (e) => {
+        const value = e.target.value
+
+        if (value === "firstName" && value.length < 3 && value.length > 20) {
+            setFormErrors(state => ({ ...state, firstName: "First name should be between 3 and 20 characters long!" }))
+        }
+
+        if (value === "lastName" && value.length < 3 && value.length > 20) {
+            setFormErrors(state => ({ ...state, firstName: "Last name should be between 3 and 20 characters long!" }))
+        }
+
+        setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
     }
 
     return (
@@ -56,6 +76,9 @@ function App() {
                     users={users}
                     onUserCreateSubmit={onUserCreateSubmit}
                     onUserDelete={onUserDelete}
+                    formValues={formValues}
+                    formChangeHandler={formChangeHandler}
+                    formErrors={formErrors}
                 />
 
             </main>
