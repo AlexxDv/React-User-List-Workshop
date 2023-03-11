@@ -10,7 +10,7 @@ import "./App.css"
 
 function App() {
     const [users, setUsers] = useState([])
-    
+
     const [formValues, setFormValues] = useState({
         firstName: "",
         lastName: "",
@@ -55,15 +55,15 @@ function App() {
         const value = e.target.value
         const errors = {}
 
-        if (value === "firstName" && (value.length < 3 || value.length > 20)) {
+        if (e.target.name === "firstName" && (value.length < 3 || value.length > 20)) {
             errors.firstName = "First name should be between 3 and 20 characters long!"
         }
 
-        if (value === "lastName" && (value.length < 3 || value.length > 20)) {
+        if (e.target.name === "lastName" && (value.length < 3 || value.length > 20)) {
             errors.lastName = "Last name should be between 3 and 20 characters long!"
         }
         setFormErrors(errors)
-        setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
+        setFormValues(state => ({ ...state, [e.target.name]: value }))
     }
 
     return (
