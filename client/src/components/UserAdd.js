@@ -1,13 +1,4 @@
 export const UserAdd = ({
-    _id,
-    firstName,
-    lastName,
-    email,
-    imageUrl,
-    createdAt,
-    updatedAt,
-    phoneNumber,
-    address,
     onUserCreateSubmit,
     onClose
 }) => {
