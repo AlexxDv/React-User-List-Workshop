@@ -53,11 +53,11 @@ function App() {
     const formChangeHandler = (e) => {
         const value = e.target.value
 
-        if (value === "firstName" && value.length < 3 && value.length > 20) {
+        if (value === "firstName" && (value.length < 3 || value.length > 20)) {
             setFormErrors(state => ({ ...state, firstName: "First name should be between 3 and 20 characters long!" }))
         }
 
-        if (value === "lastName" && value.length < 3 && value.length > 20) {
+        if (value === "lastName" && (value.length < 3 || value.length > 20)) {
             setFormErrors(state => ({ ...state, lastName: "Last name should be between 3 and 20 characters long!" }))
         }
 
