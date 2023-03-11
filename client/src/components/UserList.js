@@ -21,6 +21,7 @@ export const UserList = ({
     formValues,
     formChangeHandler,
     formErrors,
+    formValidate
 }) => {
     const [userAction, setUserAction] = useState({ user: null, action: null })
 
@@ -91,6 +92,7 @@ export const UserList = ({
                     formValues={formValues}
                     formChangeHandler={formChangeHandler}
                     formErrors={formErrors}
+                    formValidate={formValidate}
                 />}
             {userAction.action === UserActions.Delete && <UserDelete {...userAction.user} onDeleteClick={onDeleteHandler} onClose={onClose} />}
             {userAction.action === UserActions.Details && <UserDetails {...userAction.user} onClose={onClose} />}

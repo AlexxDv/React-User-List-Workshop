@@ -3,7 +3,8 @@ export const UserAdd = ({
     onClose,
     formValues,
     formChangeHandler,
-    formErrors
+    formErrors,
+    formValidate
 }) => {
     return (
         <div className="overlay">
@@ -27,7 +28,7 @@ export const UserAdd = ({
                                 <label htmlFor="firstName">First name</label>
                                 <div className="input-wrapper">
                                     <span><i className="fa-solid fa-user"></i></span>
-                                    <input id="firstName" name="firstName" type="text" value={formValues.firstName} onChange={formChangeHandler} />
+                                    <input id="firstName" name="firstName" type="text" value={formValues.firstName} onChange={formChangeHandler} onBlur={formValidate} />
                                 </div>
                                 {formErrors.firstName &&
                                     <p className="form-error">
@@ -39,7 +40,7 @@ export const UserAdd = ({
                                 <label htmlFor="lastName">Last name</label>
                                 <div className="input-wrapper">
                                     <span><i className="fa-solid fa-user"></i></span>
-                                    <input id="lastName" name="lastName" type="text" value={formValues.lastName} onChange={formChangeHandler} />
+                                    <input id="lastName" name="lastName" type="text" value={formValues.lastName} onChange={formChangeHandler} onBlur={formValidate}/>
                                 </div>
                                 {formErrors.lastName &&
                                     <p className="form-error">

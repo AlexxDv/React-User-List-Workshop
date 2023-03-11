@@ -52,18 +52,22 @@ function App() {
     }
 
     const formChangeHandler = (e) => {
+
+        setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
+    }
+
+    const formValidate = (e) => {
         const value = e.target.value
         const errors = {}
 
         if (e.target.name === "firstName" && (value.length < 3 || value.length > 20)) {
-            errors.firstName = "First name should be between 3 and 20 characters long!"
+            errors.firstName = "First name should be between 3 and 20 characters!"
         }
 
         if (e.target.name === "lastName" && (value.length < 3 || value.length > 20)) {
-            errors.lastName = "Last name should be between 3 and 20 characters long!"
+            errors.lastName = "Last name should be between 3 and 20 characters!"
         }
         setFormErrors(errors)
-        setFormValues(state => ({ ...state, [e.target.name]: value }))
     }
 
     return (
@@ -81,6 +85,7 @@ function App() {
                     formValues={formValues}
                     formChangeHandler={formChangeHandler}
                     formErrors={formErrors}
+                    formValidate={formValidate}
                 />
 
             </main>
