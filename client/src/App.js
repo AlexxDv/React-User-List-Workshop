@@ -10,6 +10,10 @@ import "./App.css"
 
 function App() {
     const [users, setUsers] = useState([])
+    const [formValue, setFormValue] = useState({
+        firstName: "",
+        lastName: "",
+    })
 
     useEffect(() => {
         userService.getAll()
