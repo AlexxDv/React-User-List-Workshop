@@ -58,7 +58,7 @@ function App() {
         }
 
         if (value === "lastName" && value.length < 3 && value.length > 20) {
-            setFormErrors(state => ({ ...state, firstName: "Last name should be between 3 and 20 characters long!" }))
+            setFormErrors(state => ({ ...state, lastName: "Last name should be between 3 and 20 characters long!" }))
         }
 
         setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
